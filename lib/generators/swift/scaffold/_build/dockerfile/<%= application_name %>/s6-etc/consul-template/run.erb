@@ -1,0 +1,3 @@
+#!/bin/bash
+
+consul-template -consul=$CONSUL_URI -wait="$CONSUL_WAIT" -max-stale="$CONSUL_STALE" -template "/<%= application_name %>/config.ctmpl:/<%= application_name %>/config.json:pkill <%= application_name %>App"

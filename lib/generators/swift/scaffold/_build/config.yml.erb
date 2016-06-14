@@ -16,7 +16,14 @@ fetch:
 test:
   enabled: true
 build:
-  enabled: true
+  post:
+    copy:
+      -
+        from: '../src/.build/debug/<%= application_name %>App'
+        to: './dockerfile/<%= application_name %>'
+      -
+        from: './swagger_spec/swagger.yml'
+        to: './dockerfile/<%= application_name %>/swagger_spec'
 run:
   pre:
     consul_loader:

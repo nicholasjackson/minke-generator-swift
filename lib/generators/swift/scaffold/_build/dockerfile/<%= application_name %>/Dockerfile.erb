@@ -1,22 +1,36 @@
-FROM golang:latest
+FROM ibmcom/kitura-ubuntu:latest
 
-EXPOSE 8080
+EXPOSE 8090
 
 # Create directory for server files
 RUN mkdir /<%= application_name %>
 
-# Install supervisor and consul-template
-RUN apt-get update
-RUN echo y| apt-get install wget tar supervisor
-RUN wget https://github.com/hashicorp/consul-template/releases/download/v0.10.0/consul-template_0.10.0_linux_386.tar.gz
-RUN tar -xvzf consul-template_0.10.0_linux_386.tar.gz
-RUN mv consul-template_0.10.0_linux_386/consul-template /bin/consul-template
+# Create logs folder
+RUN mkdir /var/log/<%= application_name %>
 
-# Configure consul-template supervisor and nginx
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Install s6 and consul-template
+RUN apt-get update
+RUN yes | apt-get install wget tar unzip
+
+# s6 overlay
+ADD https://github.com/just-containers/s6-overlay/releases/download/v1.17.1.1/s6-overlay-amd64.tar.gz /tmp/s6-overlay.tar.gz
+RUN tar xvfz /tmp/s6-overlay.tar.gz -C /; \
+rm -rf /etc/s6
+
+RUN wget https://releases.hashicorp.com/consul-template/0.15.0/consul-template_0.15.0_linux_386.zip; \
+unzip consul-template_0.15.0_linux_386.zip; \
+mv consul-template /bin/consul-template
+
+# Configure consul-template supervisor and S6 config
 COPY config.ctmpl /<%= application_name %>/config.ctmpl
 
-# Copy binary
-COPY <%= application_name %> /<%= application_name %>/<%= application_name %>
+COPY s6-etc /etc/s6
+RUN chmod -R 755 /etc/s6
 
-CMD ["/usr/bin/supervisord", "-c","/etc/supervisor/conf.d/supervisord.conf"]
+# Copy binary
+COPY <%= application_name %>App /<%= application_name %>/<%= application_name %>App
+COPY libCHttpParser.so /usr/local/lib/libCHttpParser.so
+ENV LD_LIBRARY_PATH /usr/local/lib:${LD_LIBRARY_PATH}
+
+ENTRYPOINT ["/bin/s6-svscan","/etc/s6"]
+CMD []

@@ -1,3 +1,15 @@
 {
-  "environment": "{{key "<%= SERVICE_NAME %>/Settings/environment"}}"
+  "environment": "{{key "stock-levels/Settings/environment"}}",
+  "api_key": "{{key "stock-levels/Settings/api_key"}}",
+  "database": {
+    "user": "{{key "stock-levels/Credentials/mysql/username"}}",
+    "password": "{{key "stock-levels/Credentials/mysql/password"}}",
+    "dbname": "{{key "stock-levels/Settings/mysql/db_name"}}",
+    "host": "{{range service "mysql-stocklevels"}}{{.Address}}{{end}}",
+    "port": {{range service "mysql-stocklevels"}}{{.Port}}{{end}}
+  },
+  "statsd": {
+    "host": "{{key "stock-levels/Settings/statsd/host"}}",
+    "port": {{key "stock-levels/Settings/statsd/port"}}
+  }
 }
