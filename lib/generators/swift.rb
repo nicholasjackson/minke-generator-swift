@@ -15,8 +15,8 @@ module Minke
 
       config.build_settings.build_commands = Minke::Generators::BuildCommands.new.tap do |bc|
         bc.fetch = [['/bin/bash', '-c', 'swift build --fetch'], ['/bin/bash', '-c', 'find Packages/ -type d -name Tests | xargs rm -rf']]
-        bc.build = [['/bin/bash', '-c', 'swift build -Xcc -fblocks -Xlinker -rpath -Xlinker .build/debug']]
-        bc.test = [['/bin/bash', '-c', 'swift test']]
+        bc.build = [['/bin/bash', '-c', 'swift build -Xcc -fblocks']]
+        bc.test  = [['/bin/bash', '-c', 'swift test']]
       end
 
       config.build_settings.docker_settings = Minke::Generators::DockerSettings.new.tap do |bs|

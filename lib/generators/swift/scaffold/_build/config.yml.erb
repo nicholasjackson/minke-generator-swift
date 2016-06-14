@@ -32,8 +32,6 @@ run:
         address: consul
         port: 8500
         type: private
-    tasks:
-      - migrate
 cucumber:
   pre:
     consul_loader:
@@ -43,9 +41,7 @@ cucumber:
         port: 8500
         type: private
     health_check:
-      address: apiipad
-      port: 5000
+      address: <%= application_name %>
+      port: 8090
       path: /v1/health
       type: private
-    tasks:
-      - migrate

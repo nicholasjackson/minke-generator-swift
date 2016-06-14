@@ -8,7 +8,7 @@ import LoggerAPI
 import SwiftyJSON
 
 import StatsD
-//import <%= application_name %>
+import <%= application_name %>
 
 var config: JSON? = nil
 var statsD: StatsD? = nil
@@ -41,12 +41,11 @@ private func loadConfig() -> JSON? {
 
 setupLogger()
 config = loadConfig()
-//statsD = Metrics().setupStatsD()
-//Database(statsD: statsD!).setupConnectionPool()
-//router = Routing(statsD: statsD!, config: config!).setupRouter()
+statsD = Metrics().setupStatsD()
+router = Routing(statsD: statsD!, config: config!).setupRouter()
 
 Log.info("Starting Server on port 8090:")
-//statsD!.increment(bucket: "\(Buckets.Application.rawValue).\(Buckets.Started.rawValue)")
+statsD!.increment(bucket: "\(Buckets.Application.rawValue).\(Buckets.Started.rawValue)")
 
 let server = HTTPServer.listen(port: 8090, delegate: router!)
 Server.run()

@@ -1,7 +1,7 @@
 <%= application_name %>:
   image: <%= application_name %>
   ports:
-    - "8080:8080"
+    - "::8090"
   environment:
     - "CONSUL_URI=consul:8500"
   links:
@@ -10,15 +10,15 @@
 consul:
   image: progrium/consul
   ports:
-    - "9400:8400"
-    - "9500:8500"
-    - "9600:53/udp"
+    - "::8400"
+    - "::8500"
+    - "::53/udp"
   hostname: node1
   command: "-server -bootstrap -ui-dir /ui"
 statsd:
   image: 'hopsoft/graphite-statsd:latest'
   ports:
-    - "8180:80"
+    - "::80"
   expose:
     - "8125/udp"
 registrator:
