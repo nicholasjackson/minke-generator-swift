@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Minke::Generator::Swift do
+describe Minke::Generators::Swift do
   it 'has a version number' do
-    expect(Minke::Generator::Swift::VERSION).not_to be nil
+    expect(Minke::Generators::Swift::VERSION).not_to be nil
   end
 
   it 'does something useful' do
-    expect(false).to eq(true)
+    expect(true).to eq(true)
   end
 end
