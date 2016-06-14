@@ -1,0 +1,44 @@
+---
+application_name: '<%= application_name %>'
+namespace: '<%= namespace %>'
+generator_name: 'minke-generator-swift'
+docker_registry:
+  url: <%= ENV['DOCKER_REGISTRY_URL'] %>
+  user: <%= ENV['DOCKER_REGISTRY_USER'] %>
+  password: <%= ENV['DOCKER_REGISTRY_PASS'] %>
+  email: <%= ENV['DOCKER_REGISTRY_EMAIL'] %>
+  namespace: <%= ENV['DOCKER_NAMESPACE'] %>
+docker:
+  application_docker_file: './dockerfile/<%= application_name %>/'
+  application_compose_file: './dockercompose/<%= application_name %>/docker-compose.yml'
+fetch:
+  enabled: true
+test:
+  enabled: true
+build:
+  enabled: true
+run:
+  pre:
+    consul_loader:
+      config_file: './consul_keys.yml'
+      url:
+        address: consul
+        port: 8500
+        type: private
+    tasks:
+      - migrate
+cucumber:
+  pre:
+    consul_loader:
+      config_file: './consul_keys.yml'
+      url:
+        address: consul
+        port: 8500
+        type: private
+    health_check:
+      address: apiipad
+      port: 5000
+      path: /v1/health
+      type: private
+    tasks:
+      - migrate

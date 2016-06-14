@@ -1,0 +1,14 @@
+[supervisord]
+nodaemon=true
+loglevel=debug
+
+[program:consul-template]
+command=consul-template -consul=%(ENV_CONSUL_URI)s -template "/<%= application_name %>/config.ctmpl:/<%= application_name %>/config.json:pkill <%= application_name %>"
+
+[program:server]
+command=/<%= application_name %>/StockServiceApp /<%= application_name %>/config.json /<%= application_name %>
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+autorestart=true

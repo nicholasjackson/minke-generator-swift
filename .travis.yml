@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.3.1
+install: bundle
+script:
+- rake test
+- rake build
+deploy:
+  provider: rubygems
+  gem: minke-generator-swift
+  on:
+    repo: nicholasjackson/minke-generator-swift
+  api_key:
+    secure: Z4YTNo9euqypew0HJhqMKn+Qt6QpccFseNY9dj5gc1WfjkH6LBu2cd0kMB4exdSpzNdQbPUoylSOxo3Sn1BsDsVHYyJ9PRAffmqbMVtmXz/OL9tDIAUfzFA2C981BSJbMBNkFC+AjHnYuaPFJqnnyvYCPCItQILluoZlyfquM4KqzydnO7FCT1J7fl2Bt6aLPk7QQ9hwlxE7h66pX6fEGgZPUFHEwno23+lr4x8bkUrRoGgxz5sEDyvQm9WgzvjaJA5ahxJIT5o4a+I9POQQu8b6MTkLBfrBHwG/GaOQwdciSBkclOoBdwDbZMKBNKC+Hm3gBb+7vaexNNGkcB5tyFVOlo9b/VhHn/BtKRrBZkaHUA3YC1nHAYBEnnC1BmqPR13mK7o5Am/s0h6uIpnxnk6PMf3lfD515LmiLSLsZ0LESfciTjwBy1MtU1ZuN2Nf2bAv5Zl1fsjPFZqBu1NpgTHK5DSarbsuP5ZsFIAYc0VDma09zFMmLfVEcsPiqt2biMpCaM7BBupybT5imSNwssrlrOMwsDv4uW9iMmhcleF9dEbn5T89pCFNfMXSsTI2IYMLkq3j5NKTLQmkqWiN7vTSIA9w1vRj0t0N7qC8PXlHbsZ25DG0QB4H072KCOSaCVgBFTkMve2hEi/RTZYHkXGaotwNoISPU49M5pn3KDo=

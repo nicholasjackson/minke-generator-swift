@@ -1,0 +1,15 @@
+{
+  "environment": "dev",
+  "api_key": "abc123456",
+  "database": {
+    "user": "root",
+    "password": "my-secret-pw",
+    "dbname": "StockService",
+    "host": "127.0.0.1",
+    "port": 3406
+  },
+  "statsd": {
+    "host" : "127.0.0.1",
+    "port" : 8125
+  }
+}

@@ -1,0 +1,10 @@
+import XCTest
+import StatsD
+
+@testable import <%= application_name%>TestSuite
+
+XCTMain([
+  testCase(HealthHandlerResponseTests.allTests),
+  testCase(HealthHandlerTests.allTests)
+  ]
+)

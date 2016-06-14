@@ -1,0 +1,52 @@
+import Foundation
+
+import Kitura
+import KituraSys
+import KituraNet
+import HeliumLogger
+import LoggerAPI
+import SwiftyJSON
+
+import StatsD
+//import <%= application_name %>
+
+var config: JSON? = nil
+var statsD: StatsD? = nil
+var router: Router? = nil
+
+private func setupLogger() {
+  Log.logger = HeliumLogger()
+}
+
+// Load the config from the json file
+private func loadConfig() -> JSON? {
+  if Process.arguments.count < 2 {
+    Log.error("Please specify config file")
+
+    return nil
+  }
+
+  if let jsonData = NSData(contentsOfFile: Process.arguments[1])
+  {
+    let config = JSON(data: jsonData)
+    Log.info("Loaded config: \(config)")
+
+    return config
+  } else {
+    Log.error("Unable to load config")
+
+    return nil
+  }
+}
+
+setupLogger()
+config = loadConfig()
+//statsD = Metrics().setupStatsD()
+//Database(statsD: statsD!).setupConnectionPool()
+//router = Routing(statsD: statsD!, config: config!).setupRouter()
+
+Log.info("Starting Server on port 8090:")
+//statsD!.increment(bucket: "\(Buckets.Application.rawValue).\(Buckets.Started.rawValue)")
+
+let server = HTTPServer.listen(port: 8090, delegate: router!)
+Server.run()
