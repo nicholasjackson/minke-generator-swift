@@ -8,7 +8,7 @@ For information on Minke please see the documentation [http://nicholasjackson.gi
 
 ## Available variables for templates (erb style)
 | Variable                | Description                            |
-| ----------------------- |                                        |
+| ----------------------- | -------------------------------------- |
 | <%= application_name %> | The name of the application executable |
 | <%= namespace %>        | Namespace of the application           |
 | <%= src_root %>         | Source root of the application         |
@@ -19,7 +19,7 @@ To scaffold a new service run:
 ```bash
 $ mkdir service
 $ cd service
-$ curl -L -s get.minke.rocks | bash -s bundle install && minke -g minke-generator-swift -o $(pwd) -n swift.service -a service
+$ curl -L -s get.minke.rocks | bash -s ' -g minke-generator-swift -o $(pwd) -n service -a service'
 ```
 
 ## Build and test with Docker
