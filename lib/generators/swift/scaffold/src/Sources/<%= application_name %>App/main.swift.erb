@@ -30,13 +30,10 @@ private func loadConfig() -> JSON? {
   {
     let config = JSON(data: jsonData)
     Log.info("Loaded config: \(config)")
-
     return config
-  } else {
-    Log.error("Unable to load config")
-
-    return nil
   }
+
+  return nil
 }
 
 setupLogger()
@@ -47,5 +44,5 @@ router = Routing(statsD: statsD!, config: config!).setupRouter()
 Log.info("Starting Server on port 8090:")
 statsD!.increment(bucket: "\(Buckets.Application.rawValue).\(Buckets.Started.rawValue)")
 
-let server = HTTPServer.listen(port: 8090, delegate: router!)
-Server.run()
+Kitura.addHTTPServer(onPort: 8090, with: router!)
+Kitura.run()

@@ -9,7 +9,7 @@ BUILDCOMMAND := "swift build -Xcc -fblocks -Xlinker -rpath -Xlinker .build/debug
 endif
 
 fetch:
-	swift build --fetch
+	swift package fetch
 	find Packages/ -type d -name Tests | xargs rm -rf
 clean:
 	@echo --- Invoking swift build --clean
@@ -22,4 +22,4 @@ test: build
 	swift test
 run: build
 	@echo --- Starting server
-	.build/debug/StockServiceApp ./Sources/<%= application_name %>App/config.json
+	.build/debug/<%= application_name %>App ./Sources/<%= application_name %>App/config.json

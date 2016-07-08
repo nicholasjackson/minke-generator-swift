@@ -19,7 +19,7 @@ To scaffold a new service run:
 ```bash
 $ mkdir service
 $ cd service
-$ docker run --rm -v $(pwd):$(pwd) -w $(pwd) nicholasjackson/minke /bin/bash -c 'source /usr/local/rvm/scripts/rvm && minke -g minke-generator-swift -o $(pwd) -n swift.service -a service'
+$ curl -L -s get.minke.rocks | bash -s bundle install && minke -g minke-generator-swift -o $(pwd) -n swift.service -a service
 ```
 
 ## Build and test with Docker
