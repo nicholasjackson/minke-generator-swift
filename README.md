@@ -1,3 +1,4 @@
+![Minke](http://minke.rocks/img/minke_logo.png)
 # Minke::Generators::Swift
 
 [![Build Status](https://travis-ci.org/nicholasjackson/minke-generator-swift.svg?branch=master)](https://travis-ci.org/nicholasjackson/minke-generator-swift)  
