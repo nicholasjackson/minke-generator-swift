@@ -29,7 +29,7 @@ public class HealthHandlerTests: XCTestCase {
 }
 
 extension HealthHandlerTests {
-  static var allTests: [(String, HealthHandlerTests -> () throws -> Void)] {
+  static var allTests: [(String, (HealthHandlerTests) -> () throws -> Void)] {
     return [
       ("testReturnsHTTPStatusOK", testReturnsHTTPStatusOK),
       ("testReturnsValidResponse", testReturnsValidResponse)

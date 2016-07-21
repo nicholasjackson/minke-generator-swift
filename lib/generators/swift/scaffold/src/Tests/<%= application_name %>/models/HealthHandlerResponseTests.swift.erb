@@ -15,7 +15,7 @@ public class HealthHandlerResponseTests: XCTestCase {
 }
 
 extension HealthHandlerResponseTests {
-  static var allTests: [(String, HealthHandlerResponseTests -> () throws -> Void)] {
+  static var allTests: [(String, (HealthHandlerResponseTests) -> () throws -> Void)] {
     return [
       ("testSerializesObject", testSerializesObject)
     ]
