@@ -14,8 +14,10 @@ module Minke
       config.build_settings = Minke::Generators::BuildSettings.new
 
       config.build_settings.build_commands = Minke::Generators::BuildCommands.new.tap do |bc|
-        bc.fetch = [['/bin/bash', '-c', 'swift package fetch'], ['/bin/bash', '-c', 'find Packages/ -type d -name Tests | xargs rm -rf'], ['/bin/bash', '-c', 'swift package generate-xcodeproj']]
-        bc.build = [['/bin/bash', '-c', 'swift build -Xcc -fblocks']]
+        bc.fetch = [['/bin/bash', '-c', 'swift package fetch'], 
+                    ['/bin/bash', '-c', 'find Packages/ -type d -name Tests | xargs rm -rf'], 
+                    ['/bin/bash', '-c', 'swift package generate-xcodeproj']]
+        bc.build = [['/bin/bash', '-c', 'swift build -c release -Xcc -fblocks -Xlinker -rpath -Xlinker .build/release']]
         bc.test  = [['/bin/bash', '-c', 'swift test']]
       end
 

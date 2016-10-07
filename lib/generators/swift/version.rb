@@ -1,7 +1,7 @@
 module Minke
   module Generators
     module Swift
-      VERSION = "0.2.2"
+      VERSION = "0.4"
     end
   end
 end
