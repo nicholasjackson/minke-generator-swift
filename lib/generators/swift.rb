@@ -22,7 +22,7 @@ module Minke
       end
 
       config.build_settings.docker_settings = Minke::Generators::DockerSettings.new.tap do |bs|
-        bs.image = 'ibmcom/kitura-ubuntu:latest'
+        bs.image = 'nicholasjackson/minke-generator-swift'
         bs.binds = ["<%= src_root %>/src:/src"]
         bs.working_directory = '/src'
       end
